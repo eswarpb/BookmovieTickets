@@ -1,0 +1,207 @@
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    gap: 20px; 
+    background-color: rgb(224, 9, 9);
+  }
+  
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:white;
+  }
+  
+  .header input {
+    width: 50%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .city-select {
+    margin-left: 20px;
+  }
+  
+  .city-select select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+ /* Homepage.css */
+
+.banner {
+    width: 100%;
+    cursor: pointer;
+  }
+  .banimg{
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  
+  /* Movies section styles */
+  .movies-section {
+    padding: 20px;
+  }
+  
+  .movies-section h2 {
+    margin-bottom: 20px;
+  }
+  
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Display 5 movies per row */
+    gap: 20px;
+  }
+  
+  .movie-card {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    cursor:pointer;
+    background-color: #fff;
+    transition: transform 0.2s;
+
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .movie-poster img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .movie-info h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+  }
+  
+  .movie-info p {
+    margin: 5px 0;
+    color: #555;
+  }
+  /* Hamburger Menu */
+/* Hamburger Menu */
+.hamburger-menu {
+    display: visible; /* Will be shown only in small screens via media query */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    position: absolute;
+    top: 20px; /* Adjust the top offset */
+    right: 10px; /* Ensures it stays in the header */
+  }
+  
+  /* Bars inside the Hamburger Menu */
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white; /* Visible on dark backgrounds */
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* Show Dropdown Menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: #333;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-menu ul li {
+    padding: 10px 20px;
+    color:black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-menu ul li:hover {
+    background-color: red;
+  }
+  .footer {
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .footer p {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+  
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .social-links img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    transform: scale(1.2); /* Slight zoom on hover */
+  }
+  
+  /* Media Query for Responsive Design */
+  @media (max-width: 768px) {
+    .hamburger-menu {
+      display: flex; /* Show Hamburger Menu on smaller screens */
+    }
+  
+    .city-select,
+    input[type="text"] {
+      display: none; /* Hide search and city select on smaller screens */
+    }
+  }
+  
+  
+  
