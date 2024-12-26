@@ -1,0 +1,21 @@
+.movie-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .movie-poster img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .movie-info {
+    padding: 0.5rem;
+    text-align: center;
+  }
