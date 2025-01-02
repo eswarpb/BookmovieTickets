@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useNavigate } from "react-router-dom";
 import MovieCard from "./moviecart";
 import "./Homepage.css";
@@ -550,24 +551,32 @@ function HomePage() {
         </div>
 
         <div
-          className={`hamburger-menu ${menuOpen ? "open" : ""}`}
-          onClick={toggleMenu}
-        >
-          <div className="bar"></div>
-          <div className="bar"></div>
-          <div className="bar"></div>
-        </div>
+        className={`hamburger-menu ${menuOpen ? 'open' : ''}`}
+        onClick={toggleMenu}
+      >
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
 
-        <nav className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
-          <ul>
-            <li>Home</li>
-            <li>Movies</li>
-            <li>Events</li>
-            <li>Plays</li>
-            <li>Sports</li>
-            <li>Activities</li>
-          </ul>
-        </nav>
+      {/* Offcanvas Dropdown Menu */}
+      <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Hey User!</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <nav>
+          <div>
+            <div className="menu-item">Home</div>
+            <div className="menu-item">Movies</div>
+            <div className="menu-item">Events</div>
+            <div className="menu-item">Plays</div>
+            <div className="menu-item">Sports</div>
+            <div className="menu-item">Activities</div>
+          </div>
+          </nav>
+        </Offcanvas.Body>
+      </Offcanvas>
       </header>
 
       <Carousel className="banner">
