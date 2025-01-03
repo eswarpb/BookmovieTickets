@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './the.css';
+import { useLocation } from 'react-router-dom';
+import './TheatersDetails.css';
 
 const MovieShowtimes = () => {
   // Sample local movie data
@@ -32,9 +33,11 @@ const MovieShowtimes = () => {
     ],
   };
 
-
+ 
   const [selectedLanguage, setSelectedLanguage] = useState('Telugu');
   const [date, setDate] = useState(new Date()); // Initial date
+  const location = useLocation();
+  const { movieName } = location.state || { movieName: "Unknown Movie" };
 
 
   const handleLanguageChange = (language) => setSelectedLanguage(language);
@@ -63,7 +66,7 @@ const MovieShowtimes = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* Left Panel */}
         <div style={{ flex: '1' }}>
-          <h1>Pushpa 2: The Rule - Showtimes</h1>
+        <h1>{movieName} - Showtimes</h1>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <button onClick={() => handleDateChange('prev')} style={{ marginRight: '10px' }}>
