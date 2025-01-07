@@ -1,118 +1,120 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import './TheatersDetails.css';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
+import datab from "../TheatresData/Theatresfirebase"; // Import your Firebase config
+import { collection, getDocs } from "firebase/firestore";
+import "./TheatersDetails.css";
 
 const MovieShowtimes = () => {
-  // Sample local movie data
-  const movieData = {
-    theatres: [
-      {
-        id: '1',
-        name: 'AAA Cinemas: Ameerpet',
-        showtimes: ['10:45 AM', '03:50 PM', '05:30 PM', '09:30 PM'],
-        language: ['Telugu', 'Hindi'],
-      },
-      {
-        id: '2',
-        name: 'Alankar (Pratap Theatre): Langer House',
-        showtimes: ['02:00 PM', '05:45 PM', '09:30 PM'],
-        language: ['Telugu', 'Tamil'],
-      },
-      {
-        id: '3',
-        name: 'AMB Cinemas: Gachibowli',
-        showtimes: ['12:55 PM', '03:50 PM'],
-        language: ['Hindi', 'Malayalam'],
-      },
-      {
-        id: '4',
-        name: 'Aparna Cinemas: Nallagandla',
-        showtimes: ['02:30 PM', '06:30 PM', '07:25 PM', '10:30 PM', '11:15 PM'],
-        language: ['Telugu', 'Malayalam'],
-      },
-    ],
-  };
-
- 
-  const [selectedLanguage, setSelectedLanguage] = useState('Telugu');
-  const [date, setDate] = useState(new Date()); // Initial date
+  const [theatresData, setTheatresData] = useState([]); // State for theater data
+  const [loading, setLoading] = useState(true); // State for loading indicator
+  const [selectedLanguage, setSelectedLanguage] = useState("Telugu"); // State for language filter
+  const [date, setDate] = useState(new Date()); // State for selected date
   const location = useLocation();
-  const { movieName } = location.state || { movieName: "Unknown Movie" };
+  const { movieName } = location.state || { movieName: "Select Movie" };
 
+  // Fetch theater data from Firestore
+  useEffect(() => {
+    const fetchTheatres = async () => {
+      setLoading(true);
+      try {
+        const theatresCollection = collection(datab, "theatres"); // Replace "theatres" with your Firestore collection name
+        const theatresSnapshot = await getDocs(theatresCollection);
+        const theatresList = theatresSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTheatresData(theatresList);
+      } catch (error) {
+        console.error("Error fetching theaters: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchTheatres();
+  }, []);
+
+  // Handle language selection
   const handleLanguageChange = (language) => setSelectedLanguage(language);
 
-  // Function to handle date change (e.g., on button click)
+  // Navigate between dates
   const handleDateChange = (direction) => {
     const newDate = new Date(date);
-
-    if (direction === 'prev') {
-      newDate.setDate(newDate.getDate() - 1);
-    } else if (direction === 'next') {
-      newDate.setDate(newDate.getDate() + 1);
-    }
-
+    direction === "prev"
+      ? newDate.setDate(newDate.getDate() - 1)
+      : newDate.setDate(newDate.getDate() + 1);
     setDate(newDate);
   };
 
-  // Filter theaters by selected language
-  const filteredTheatres = movieData.theatres.filter((theatre) =>
-    theatre.language.includes(selectedLanguage)
+  // Filter theaters based on selected language
+  const filteredTheatres = theatresData.filter((theatre) =>
+    theatre.language?.includes(selectedLanguage)
   );
 
+  // Determine class for showtime based on index (e.g., available or fast-filling)
+  const getShowtimeClass = (index) =>
+    index % 2 === 0 ? "available" : "fast-filling";
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* Date Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Left Panel */}
-        <div style={{ flex: '1' }}>
-        <h1>{movieName} - Showtimes</h1>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <button onClick={() => handleDateChange('prev')} style={{ marginRight: '10px' }}>
-            Previous
-          </button>
-          <button onClick={() => handleDateChange('next')}>Next</button>
-          <p style={{ marginTop: '10px' }}>
-            Selected Date: {date.toDateString()}
-          </p>
-        </div>
-      </div>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-            <span className="avail">🟩Available</span>
-            <span className="fill">🟧Fast filling</span>
+    <div className="container">
+      <h1>🎬{movieName} - Showtimes</h1>
+
+      {/* Loading Indicator */}
+      {loading ? (
+        <center> <Spinner animation="border" variant="danger" /></center>
+ 
+      ) : (
+        <>
+          {/* Date Navigation */}
+          <div className="date-navigation">
+            <button onClick={() => handleDateChange("prev")}>Previous</button>
+            <button onClick={() => handleDateChange("next")}>Next</button>
+          </div>
+          <p>Selected Date: {date.toDateString()}</p>
+
+          {/* Language Selection */}
+          <div className="language-selection">
+            <select
+              value={selectedLanguage}
+              onChange={(e) => handleLanguageChange(e.target.value)}
+            >
+              <option value="Telugu">Telugu</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Malayalam">Malayalam</option>
+            </select>
+
+            <div className="legend">
+              <span className="avail">🟩 Available</span>
+              <span className="fill">🟧 Fast filling</span>
+            </div>
           </div>
 
-          {/* Showtimes Divs */}
-          <div className="showtimes-container" style={{ marginTop: '20px' }}>
-            {filteredTheatres.map((theatre) => (
-              <div key={theatre.id} className="theatre-card">
-                <h3 className="theatre-name">{theatre.name}</h3>
-                <div className="showtimes">
-                  {theatre.showtimes.map((time, index) => (
-                    <span key={index} className="showtime">{time}</span>
-                  ))}
+          {/* Theater Cards */}
+          <div className="showtimes-container">
+            {filteredTheatres.length > 0 ? (
+              filteredTheatres.map((theatre) => (
+                <div key={theatre.id} className="theatre-card">
+                  <h3 className="theatre-name">{theatre.name}</h3>
+                  <div className="showtimes">
+                    {theatre.showtimes.map((time, index) => (
+                      <span
+                        key={index}
+                        className={`showtime ${getShowtimeClass(index)}`}
+                      >
+                        {time}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No theatres available for the selected language.</p>
+            )}
           </div>
-        </div>
-
-        {/* Right Panel */}
-        <div style={{ marginLeft: '20px', minWidth: '200px' }}>
-          <h2>Languages</h2>
-          <select
-            value={selectedLanguage}
-            onChange={(e) => handleLanguageChange(e.target.value)}
-            style={{ padding: '10px', fontSize: '1em' }}
-          >
-            <option value="Telugu">Telugu</option>
-            <option value="Hindi">Hindi</option>
-            <option value="Tamil">Tamil</option>
-            <option value="Malayalam">Malayalam</option>
-          </select>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
