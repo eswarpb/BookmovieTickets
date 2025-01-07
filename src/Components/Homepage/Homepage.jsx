@@ -54,7 +54,6 @@ function HomePage() {
 
   return (
     <div className="App">
-      
       <header className="header">
         <div className="logo">BookMovieTickets</div>
         <input
@@ -99,7 +98,6 @@ function HomePage() {
         </Offcanvas.Body>
       </Offcanvas>
       </header>
-
       <Carousel className="banner">
         <Carousel.Item>
           <img

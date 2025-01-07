@@ -1,3 +1,54 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  gap: 20px; 
+  background-color: rgb(224, 9, 9);
+}
+
+.header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color:white;
+}
+
+.header input {
+  width: 50%; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white; 
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+.menu-item {
+  font-size: large;
+  cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.3s ease;
+  border: 1px beige;
+  border-style: outset;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+.city-select select {
+  flex: 1 1 auto;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -7,7 +58,34 @@
 
 .date-navigation {
   display: flex;
+  justify-content: left;
   gap: 10px;
+  margin: 20px 0;
+}
+
+.date-button {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 60px;
+}
+
+.date-button.selected {
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+}
+
+.date-button:hover {
+  background-color: #ffb3b3;
+}
+
+.date-button div {
+  font-size: 14px;
 }
 
 .language-selection {

@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
-import datab from "../TheatresData/Theatresfirebase"; // Import your Firebase config
+import { useLocation, useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import datab from "../TheatresData/Theatresfirebase"; // Firebase config
 import { collection, getDocs } from "firebase/firestore";
 import "./TheatersDetails.css";
 
 const MovieShowtimes = () => {
-  const [theatresData, setTheatresData] = useState([]); // State for theater data
-  const [loading, setLoading] = useState(true); // State for loading indicator
-  const [selectedLanguage, setSelectedLanguage] = useState("Telugu"); // State for language filter
-  const [date, setDate] = useState(new Date()); // State for selected date
+  const [theatresData, setTheatresData] = useState([]); // Theater data state
+  const [loading, setLoading] = useState(true); // Loading state
+  const [selectedLanguage, setSelectedLanguage] = useState("Telugu"); // Language filter state
+  const [date, setDate] = useState(new Date()); // Date state
+  const [searchQuery, setSearchQuery] = useState(""); // Search query state
   const location = useLocation();
   const { movieName } = location.state || { movieName: "Select Movie" };
+  const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   // Fetch theater data from Firestore
   useEffect(() => {
     const fetchTheatres = async () => {
       setLoading(true);
       try {
-        const theatresCollection = collection(datab, "theatres"); // Replace "theatres" with your Firestore collection name
+        const theatresCollection = collection(datab, "theatres");
         const theatresSnapshot = await getDocs(theatresCollection);
         const theatresList = theatresSnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -39,41 +45,104 @@ const MovieShowtimes = () => {
   const handleLanguageChange = (language) => setSelectedLanguage(language);
 
   // Navigate between dates
-  const handleDateChange = (direction) => {
-    const newDate = new Date(date);
-    direction === "prev"
-      ? newDate.setDate(newDate.getDate() - 1)
-      : newDate.setDate(newDate.getDate() + 1);
-    setDate(newDate);
+  const getNext7Days = () => {
+    const days = [];
+    for (let i = 0; i < 5; i++) {
+      const newDate = new Date();
+      newDate.setDate(date.getDate() + i);
+      days.push(newDate);
+    }
+    return days;
   };
 
-  // Filter theaters based on selected language
-  const filteredTheatres = theatresData.filter((theatre) =>
-    theatre.language?.includes(selectedLanguage)
+  // Filter theaters by language and search query
+  const filteredTheatres = theatresData.filter(
+    (theatre) =>
+      theatre.language?.includes(selectedLanguage) &&
+      theatre.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Determine class for showtime based on index (e.g., available or fast-filling)
+  // Navigate to theater details
+  const handleTheatreClick = (theatre) => {
+    navigate(`/theatre/${theatre.id}`, { state: theatre });
+  };
+
+  // Determine class for showtime based on index
   const getShowtimeClass = (index) =>
     index % 2 === 0 ? "available" : "fast-filling";
 
   return (
-    <div className="container">
-      <h1>🎬{movieName} - Showtimes</h1>
+    <div>
+          <div>
+      <header className="header">
+        <div className="logo">BookMovieTickets</div>
+        <input
+          type="text"
+          placeholder="Search for theaters..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
 
-      {/* Loading Indicator */}
+        <div className="city-select">
+          <select>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="bengaluru">Bangalore</option>
+          </select>
+        </div>
+
+        <div
+          className={`hamburger-menu ${menuOpen ? "open" : ""}`}
+          onClick={toggleMenu}
+        >
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
+
+        {/* Offcanvas Dropdown Menu */}
+        <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Hey User!</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <nav>
+              <div className="menu-item">Home</div>
+              <div className="menu-item">Movies</div>
+              <div className="menu-item">Events</div>
+              <div className="menu-item">Plays</div>
+              <div className="menu-item">Sports</div>
+              <div className="menu-item">Activities</div>
+            </nav>
+          </Offcanvas.Body>
+        </Offcanvas>
+      </header>
+       </div>
+       <div className="container">
+
+      <h1>🎬 {movieName} - Showtimes</h1>
+
       {loading ? (
-        <center> <Spinner animation="border" variant="danger" /></center>
- 
+        <center>
+          <Spinner animation="border" variant="danger" />
+        </center>
       ) : (
         <>
-          {/* Date Navigation */}
-          <div className="date-navigation">
-            <button onClick={() => handleDateChange("prev")}>Previous</button>
-            <button onClick={() => handleDateChange("next")}>Next</button>
+           <div className="date-navigation">
+            {getNext7Days().map((day, index) => (
+              <button
+                key={index}
+                className={`date-button ${
+                  day.toDateString() === date.toDateString() ? "selected" : ""
+                }`}
+                onClick={() => setDate(day)}
+              >
+                <div>{day.toLocaleString("default", { weekday: "short" })}</div>
+                <div>{day.getDate()}</div>
+              </button>
+            ))}
           </div>
           <p>Selected Date: {date.toDateString()}</p>
 
-          {/* Language Selection */}
           <div className="language-selection">
             <select
               value={selectedLanguage}
@@ -91,11 +160,14 @@ const MovieShowtimes = () => {
             </div>
           </div>
 
-          {/* Theater Cards */}
           <div className="showtimes-container">
             {filteredTheatres.length > 0 ? (
               filteredTheatres.map((theatre) => (
-                <div key={theatre.id} className="theatre-card">
+                <div
+                  key={theatre.id}
+                  className="theatre-card"
+                  onClick={() => handleTheatreClick(theatre)}
+                >
                   <h3 className="theatre-name">{theatre.name}</h3>
                   <div className="showtimes">
                     {theatre.showtimes.map((time, index) => (
@@ -110,11 +182,12 @@ const MovieShowtimes = () => {
                 </div>
               ))
             ) : (
-              <p>No theatres available for the selected language.</p>
+              <p>No theatres available for the selected language or search.</p>
             )}
           </div>
         </>
       )}
+      </div>
     </div>
   );
 };
