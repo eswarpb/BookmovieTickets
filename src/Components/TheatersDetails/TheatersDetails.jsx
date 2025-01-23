@@ -45,7 +45,7 @@ const MovieShowtimes = () => {
   const handleLanguageChange = (language) => setSelectedLanguage(language);
 
   // Navigate between dates
-  const getNext7Days = () => {
+  const getNextDays = () => {
     const days = [];
     for (let i = 0; i < 5; i++) {
       const newDate = new Date();
@@ -63,13 +63,26 @@ const MovieShowtimes = () => {
   );
 
   // Navigate to theater details
-  const handleTheatreClick = (theatre) => {
-    navigate(`/theatre/${theatre.id}`, { state: theatre });
-  };
+  
 
   // Determine class for showtime based on index
   const getShowtimeClass = (index) =>
     index % 2 === 0 ? "available" : "fast-filling";
+  const handleShowtimeClick = (classType, theatreName, showtime) => {
+    const movieDetails = {
+      movieName,
+      theatreName,
+      showtime,
+      date: date.toDateString(),
+    };
+
+    if (classType === "available") {
+      navigate("/Seats1", { state: movieDetails });
+    } else if (classType === "fast-filling") {
+      navigate("/Seats2", { state: movieDetails });
+    }
+  };
+
 
   return (
     <div>
@@ -118,9 +131,9 @@ const MovieShowtimes = () => {
       </header>
        </div>
        <div className="container">
-
+          <div>
       <h1>🎬 {movieName} - Showtimes</h1>
-
+      </div>
       {loading ? (
         <center>
           <Spinner animation="border" variant="danger" />
@@ -128,7 +141,7 @@ const MovieShowtimes = () => {
       ) : (
         <>
            <div className="date-navigation">
-            {getNext7Days().map((day, index) => (
+            {getNextDays().map((day, index) => (
               <button
                 key={index}
                 className={`date-button ${
@@ -165,18 +178,24 @@ const MovieShowtimes = () => {
               filteredTheatres.map((theatre) => (
                 <div
                   key={theatre.id}
-                  className="theatre-card"
-                  onClick={() => handleTheatreClick(theatre)}
-                >
+                  className="theatre-card">
                   <h3 className="theatre-name">{theatre.name}</h3>
                   <div className="showtimes">
                     {theatre.showtimes.map((time, index) => (
-                      <span
-                        key={index}
-                        className={`showtime ${getShowtimeClass(index)}`}
-                      >
-                        {time}
-                      </span>
+                       <span
+                       key={index}
+                       className={`showtime ${getShowtimeClass(index)}`}
+                       onClick={() =>
+                         handleShowtimeClick(
+                           getShowtimeClass(index),
+                           theatre.name,
+                           time
+                         )
+                       }
+                     >
+                       {time}
+                     </span>
+
                     ))}
                   </div>
                 </div>

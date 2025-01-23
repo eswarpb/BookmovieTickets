@@ -33,6 +33,78 @@ export default function Theatres() {
       showtimes: ["02:30 PM", "06:30 PM", "07:25 PM", "10:30 PM", "11:15 PM"],
       language: ["Telugu", "Malayalam"],
     },
+    {
+      id: "5",
+      name: "Prasads Multiplex: Hyderabad",
+      showtimes: ["11:00 AM", "02:30 PM", "06:15 PM", "09:45 PM"],
+      language: ["Telugu", "Hindi", "English"],
+    },
+    {
+      id: "6",
+      name: "PVR: Nexus Mall Kukatpally, Hyderabad",
+      showtimes: ["12:00 PM", "03:45 PM", "07:00 PM", "10:30 PM"],
+      language: ["Telugu", "Hindi", "English"],
+    },
+    {
+      id: "7",
+      name: "Viswanath 70MM Theatre: Kukatpally",
+      showtimes: ["01:15 PM", "04:30 PM", "08:00 PM"],
+      language: ["Telugu", "Tamil"],
+    },
+    {
+      id: "8",
+      name: "INOX: Prism Mall, Hyderabad",
+      showtimes: ["10:30 AM", "01:45 PM", "05:15 PM", "08:45 PM"],
+      language: ["Hindi", "English", "Telugu"],
+    },
+    {
+      id: "9",
+      name: "Cinepolis: TNR North City, Kompally, Hyderabad",
+      showtimes: ["11:15 AM", "03:00 PM", "06:45 PM", "10:15 PM"],
+      language: ["Telugu", "Hindi", "Kannada"],
+    },
+    {
+      id: "10",
+      name: "Movietime Cinemas: SKY Mall, Erragadda X Road",
+      showtimes: ["12:15 PM", "04:00 PM", "07:45 PM", "11:15 PM"],
+      language: ["Telugu", "English"],
+    },
+    {
+      id: "11",
+      name: "Platinum Movietime Cinemas: Ameerpet",
+      showtimes: ["10:30 AM", "02:30 PM", "06:15 PM", "09:45 PM"],
+      language: ["Telugu", "Hindi"],
+    },
+    {
+      id: "12",
+      name: "PVR: Central Mall, Panjagutta",
+      showtimes: ["01:00 PM", "04:45 PM", "08:00 PM"],
+      language: ["English", "Hindi"],
+    },
+    {
+      id: "13",
+      name: "Tivoli Cinemas: Secunderabad",
+      showtimes: ["11:30 AM", "02:45 PM", "06:00 PM", "09:15 PM"],
+      language: ["Telugu", "Hindi", "English"],
+    },
+    {
+      id: "14",
+      name: "Asian Tarakarama Cineplex: Kachiguda",
+      showtimes: ["10:15 AM", "01:30 PM", "04:45 PM", "08:00 PM"],
+      language: ["Telugu", "Malayalam"],
+    },
+    {
+      id: "15",
+      name: "MovieMax: AMR, ECIL Secunderabad",
+      showtimes: ["11:00 AM", "02:15 PM", "05:30 PM", "09:00 PM"],
+      language: ["Telugu", "Kannada", "English"],
+    },
+    {
+      id: "16",
+      name: "Cinepolis: DSL Virtue Mall Uppal, Hyderabad",
+      showtimes: ["12:30 PM", "03:45 PM", "07:15 PM", "10:30 PM"],
+      language: ["Telugu", "Hindi", "Tamil"],
+    },
   ];
 
   const storeTheatresInFirebase = async () => {
