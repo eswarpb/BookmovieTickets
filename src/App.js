@@ -6,6 +6,7 @@ import MovieShowtimes from "./Components/TheatersDetails/TheatersDetails";
 import Seats1 from "./Components/Seats/Seats1";
 import Seats2 from "./Components/Seats/Seats2";
 import BookingSummary from "./Components/BookingSummary/Bookingsummary";
+import TicketPage from "./Components/Ticketpage/Ticketpage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Seats1" element={<Seats1 />} />
         <Route path="/Seats2" element={<Seats2 />} />
         <Route path="/booking-summary" element={<BookingSummary />} />
+        <Route path="/ticket" element={<TicketPage />} />
       </Routes>
     </Router>
   );

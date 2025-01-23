@@ -19,41 +19,52 @@ const BookingSummary = () => {
 
   const handlePayment = async () => {
     const razorpayKey = process.env.REACT_APP_RAZORPAY_KEY_ID;
-
+  
     if (!razorpayKey) {
       alert("Razorpay key not found in environment variables");
       return;
     }
-
+  
     const options = {
-      key: razorpayKey, // Your API Key ID
-      amount: Math.round(grandTotal * 100), // Amount in paise
+      key: razorpayKey,
+      amount: Math.round(grandTotal * 100),
       currency: "INR",
       name: "Movie Booking",
       description: "Enjoy your show!",
-      image: "/logo.png", // Replace with your logo
       handler: function (response) {
         alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-        navigate("/"); // Redirect after payment success
+        navigate("/ticket", {
+          state: {
+            selectedSeats,
+            movieName,
+            theatreName,
+            date,
+            showtime,
+            totalPrice,
+            convenienceFee,
+            gst,
+            grandTotal,
+          },
+        });
       },
       prefill: {
-        name: "Your Name", // Replace with user's name
-        email: "youremail@example.com", // Replace with user's email
-        contact: "1234567890", // Replace with user's contact
+        name: "Your Name",
+        email: "youremail@example.com",
+        contact: "1234567890",
       },
       theme: {
         color: "#F84464",
       },
     };
-
+  
     const rzp = new window.Razorpay(options);
     rzp.open();
-
+  
     rzp.on("payment.failed", function (response) {
       alert(`Payment Failed: ${response.error.description}`);
     });
   };
-
+  
   return (
     <div className="booking-summary">
       <h2>Booking Summary</h2>

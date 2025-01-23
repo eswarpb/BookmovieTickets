@@ -64,11 +64,11 @@ function MovieDetailsPage() {
       </div>
 
       <h3 style={{marginTop:"20px"}}>
-        <strong>About the Movie</strong>{" "}
+        <strong style={{color:"black"}}>About the Movie</strong>{" "}
       </h3>
       <p>{movie.description}</p>
       <h3>
-        <b>Cast</b>
+        <b style={{color:"black"}}>Cast</b>
       </h3>
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
         {movie.cast.map((actor, index) => (
