@@ -148,74 +148,85 @@ function HomePage() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="footer-container">
-          <h3>Contact Us</h3>
-          <p>
-            Email:{" "}
-            <a href="mailto:support@bookmovietickets.com">
-              support@bookmovietickets.com
-            </a>
-          </p>
-          <div className="social-links">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                alt="Facebook"
-              />
-            </a>
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="list-your-show">
+            <div class="icon-text">
+              <h2>🎬</h2>
+              <p>
+                <strong>List your Show</strong> Got a show, event, activity, or
+                a great experience? Partner with us & get listed on BookMyShow
+              </p>
+            </div>
+            <button class="contact-btn">Contact today!</button>
+          </div>
 
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-                alt="Instagram"
-              />
-            </a>
+          <div class="divider">
+            <hr />
+            <h2>
+              Book<span>Movie</span>Tickets
+            </h2>
+            <hr />
+          </div>
 
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
-                alt="YouTube"
-              />
+          <div class="social-icons">
+            <a href="https://www.facebook.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                  alt="Facebook"
+                />
+              </div>
             </a>
+            <a href="https://www.instagram.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                  alt="Instagram"
+                />
+              </div>
+            </a>
+            <a href="https://www.youtube.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+                  alt="YouTube"
+                />
+              </div>
+            </a>
+            <a href="https://www.linkedin.com">
+              <div class="circle">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRokEYt0yyh6uNDKL8uksVLlhZ35laKNQgZ9g&s"
+                  alt="LinkedIn"
+                />
+              </div>
+            </a>
+            <a href="https://www.pinterest.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png"
+                  alt="Pinterest"
+                />
+              </div>
+            </a>
+          </div>
 
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg"
-                alt="LinkedIn"
-              />
-            </a>
-
-            <a
-              href="https://www.pinterest.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png"
-                alt="Pinterest"
-              />
-            </a>
+          <div class="footer-text">
+            <p>
+              Copyright 2025 © Bigtree Entertainment Pvt. Ltd. All Rights
+              Reserved.
+            </p>
+            <p>
+              The content and images used on this site are copyright protected
+              and copyrights vest with the respective owners. The usage of the
+              content and images on this website is intended to promote the
+              works and no endorsement of the artist shall be implied.
+              Unauthorized use is prohibited and punishable by law.
+            </p>
           </div>
         </div>
       </footer>
-
     </div>
   );
 }

@@ -35,7 +35,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background: #007bff;
+    background: red;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -43,6 +43,6 @@
   
   .download-button:hover,
   .home-button:hover {
-    background: #0056b3;
+    background: gray;
   }
   

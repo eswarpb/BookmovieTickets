@@ -154,7 +154,7 @@ const MovieShowtimes = () => {
               </button>
             ))}
           </div>
-          <p>Selected Date: {date.toDateString()}</p>
+          <p>{date.toDateString()}</p>
 
           <div className="language-selection">
             <select
@@ -207,6 +207,85 @@ const MovieShowtimes = () => {
         </>
       )}
       </div>
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="list-your-show">
+            <div class="icon-text">
+              <h2>🎬</h2>
+              <p>
+                <strong>List your Show</strong> Got a show, event, activity, or
+                a great experience? Partner with us & get listed on BookMyShow
+              </p>
+            </div>
+            <button class="contact-btn">Contact today!</button>
+          </div>
+
+          <div class="divider">
+            <hr />
+            <h2>
+              Book<span>Movie</span>Tickets
+            </h2>
+            <hr />
+          </div>
+
+          <div class="social-icons">
+            <a href="https://www.facebook.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                  alt="Facebook"
+                />
+              </div>
+            </a>
+            <a href="https://www.instagram.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                  alt="Instagram"
+                />
+              </div>
+            </a>
+            <a href="https://www.youtube.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+                  alt="YouTube"
+                />
+              </div>
+            </a>
+            <a href="https://www.linkedin.com">
+              <div class="circle">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRokEYt0yyh6uNDKL8uksVLlhZ35laKNQgZ9g&s"
+                  alt="LinkedIn"
+                />
+              </div>
+            </a>
+            <a href="https://www.pinterest.com">
+              <div class="circle">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png"
+                  alt="Pinterest"
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="footer-text">
+            <p>
+              Copyright 2025 © Bigtree Entertainment Pvt. Ltd. All Rights
+              Reserved.
+            </p>
+            <p>
+              The content and images used on this site are copyright protected
+              and copyrights vest with the respective owners. The usage of the
+              content and images on this website is intended to promote the
+              works and no endorsement of the artist shall be implied.
+              Unauthorized use is prohibited and punishable by law.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
