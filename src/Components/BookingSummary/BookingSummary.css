@@ -33,10 +33,6 @@
     color: white;
   }
   
-  .back-button {
-    background-color: #ccc;
-    color: black;
-  }
   
   .confirm-button:hover {
     background-color: #d73b57;
@@ -45,4 +41,63 @@
   .back-button:hover {
     background-color: #bbb;
   }
+  .booking-summary {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .h2 {
+    text-align: center;
+    color: #F84464;
+  }
+  
+  .summary-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .details-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .popcorn-section {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .popcorn-image {
+    width: 100px;
+    margin: auto;
+  }
+  
+  .proceed-button {
+    background-color: #F84464;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 30%;
+  }
+  
+  .back-button {
+    background-color: #ddd;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 30%;
+  }
+  
   
