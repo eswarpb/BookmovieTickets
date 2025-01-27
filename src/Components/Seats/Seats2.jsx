@@ -125,7 +125,7 @@ const Seats2 = () => {
           </div>
         ))}
       </div>
-
+      <div className="screen">All eyes this way please!</div>
       {/* Legend */}
       {selectedSeats.length === 0 && (
         <div className="seat-legend">

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Modal from "react-modal";
 import "./BookingSummary.css";
 
 const BookingSummary = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [paymentId, setPaymentId] = useState(null); // State to store payment ID
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -14,7 +17,7 @@ const BookingSummary = () => {
     movieName,
     theatreName,
     date,
-    showtime, // Ensure poster is part of the state
+    showtime,
   } = location.state || {};
 
   const handlePayment = async () => {
@@ -32,21 +35,9 @@ const BookingSummary = () => {
       name: "Movie Booking",
       description: "Enjoy your show!",
       handler: function (response) {
-        alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
-        navigate("/ticket", {
-          state: {
-            selectedSeats,
-            movieName,
-            theatreName,
-            date,
-            showtime,
-            totalPrice,
-            convenienceFee,
-            gst,
-            grandTotal,
-             // Pass the poster to TicketPage
-          },
-        });
+        // Store payment ID and show modal
+        setPaymentId(response.razorpay_payment_id);
+        setIsModalOpen(true);
       },
       prefill: {
         name: "Your Name",
@@ -66,6 +57,24 @@ const BookingSummary = () => {
     });
   };
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    navigate("/ticket", {
+      state: {
+        selectedSeats,
+        movieName,
+        theatreName,
+        date,
+        showtime,
+        totalPrice,
+        convenienceFee,
+        gst,
+        grandTotal,
+        paymentId, // Pass the payment ID to the ticket page
+      },
+    });
+  };
+
   return (
     <div className="booking-summary">
       <h2 className="h2">Booking Summary</h2>
@@ -81,7 +90,11 @@ const BookingSummary = () => {
           <h3>Total: ₹{grandTotal.toFixed(2)}</h3>
         </div>
         <div className="popcorn-section">
-          <img src="https://in.bmscdn.com/fnb/v3/xxhdpi/1020007_16082018153109.png" alt="Popcorn" className="popcorn-image" />
+          <img
+            src="https://in.bmscdn.com/fnb/v3/xxhdpi/1020007_16082018153109.png"
+            alt="Popcorn"
+            className="popcorn-image"
+          />
           <p>Unlock the tastiest binges! Prebook your snacks and enjoy more.</p>
         </div>
       </div>
@@ -93,6 +106,25 @@ const BookingSummary = () => {
       <button className="back-button" onClick={() => navigate(-1)}>
         Go Back
       </button>
+
+      {/* Modal for payment success */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleModalClose}
+        contentLabel="Payment Success"
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Payment Successful!</h2>
+        <p>Your payment was successful.</p>
+        <p>Payment ID: {paymentId}</p> {/* Display the payment ID */}
+        <p>You can now view your ticket.</p>
+        <div className="modal-buttons">
+          <button className="modal-button" onClick={handleModalClose}>
+            OK
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
