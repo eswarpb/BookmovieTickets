@@ -283,3 +283,62 @@
   font-weight: bold;
   color: #999;
 }
+.modern-offcanvas {
+  background-color: #fdfdfd; /* Light background */
+  color: #333; /* Dark text */
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #eaeaea;
+}
+
+.offcanvas-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6200ea; /* Stylish purple for user greeting */
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 20px;
+  gap: 15px;
+}
+
+.menu-items {
+  width: 100%;
+}
+
+.menu-item {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  color: #333;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #6200ea;
+  color: #fff;
+  transform: translateX(5px); /* Subtle shift to the right */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+.menu-item:active {
+  transform: translateX(2px); /* Slightly smaller shift */
+}
+
+.menu-item:last-child {
+  border-top: 1px solid #eaeaea;
+  margin-top: 10px;
+  padding-top: 15px;
+  color: #6200ea; /* Differentiated color for activities */
+}
+
+@media (max-width: 768px) {
+  .modern-offcanvas {
+    width: 80%; /* Adjust off-canvas width for smaller screens */
+  }
+}

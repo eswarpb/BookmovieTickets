@@ -63,7 +63,6 @@ function HomePage() {
   const eventsRef = useRef(null);
   const playsRef = useRef(null);
   const sportsRef = useRef(null);
-  const activitiesRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -243,22 +242,32 @@ function HomePage() {
   </div>
 
   {/* Offcanvas Dropdown Menu */}
-  <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end">
-    <Offcanvas.Header closeButton>
-      <Offcanvas.Title>Hey {user?.name || "Guest"}</Offcanvas.Title> {/* Fallback to "Guest" if user is not logged in */}
-    </Offcanvas.Header>
-    <Offcanvas.Body>
-      <nav>
-        <div>
-          <div className="menu-item" onClick={() => scrollToSection(moviesRef)}>🎬Movies</div>
-          <div className="menu-item" onClick={() => scrollToSection(eventsRef)}>📢Events</div>
-          <div className="menu-item" onClick={() => scrollToSection(playsRef)}>🎵Plays</div>
-          <div className="menu-item" onClick={() => scrollToSection(sportsRef)}>🏀Sports</div>
-          <div className="menu-item" onClick={() => scrollToSection(activitiesRef)}>Activities</div>
-        </div>
-      </nav>
-    </Offcanvas.Body>
-  </Offcanvas>
+  <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end" className="modern-offcanvas">
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title className="offcanvas-title">
+          Hey, {user?.name || "Guest"} 👋
+        </Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+        <nav className="menu-nav">
+          <div className="menu-items">
+            <div className="menu-item" onClick={() => scrollToSection(moviesRef)}>
+              🎬 Movies
+            </div>
+            <div className="menu-item" onClick={() => scrollToSection(eventsRef)}>
+              📢 Events
+            </div>
+            <div className="menu-item" onClick={() => scrollToSection(playsRef)}>
+              🎵 Plays
+            </div>
+            <div className="menu-item" onClick={() => scrollToSection(sportsRef)}>
+              🏀 Sports
+            </div>
+           
+          </div>
+        </nav>
+      </Offcanvas.Body>
+    </Offcanvas>
 </GoogleOAuthProvider>
 
       </header>

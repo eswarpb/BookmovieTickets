@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -16,8 +16,7 @@ const MovieShowtimes = (movie) => {
   const { movieName } = location.state || { movieName: "Select Movie" };
   const navigate = useNavigate();
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+ 
 
   // Fetch theater data from Firestore
   useEffect(() => {
@@ -43,6 +42,11 @@ const MovieShowtimes = (movie) => {
 
   // Handle language selection
   const handleLanguageChange = (language) => setSelectedLanguage(language);
+   
+    const [menuOpen, setMenuOpen] = useState(false);
+  
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+  
 
   // Navigate between dates
   const getNextDays = () => {
@@ -114,21 +118,31 @@ const MovieShowtimes = (movie) => {
         </div>
 
         {/* Offcanvas Dropdown Menu */}
-        <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end">
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Hey User!</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <nav>
-              <div className="menu-item">Home</div>
-              <div className="menu-item">Movies</div>
-              <div className="menu-item">Events</div>
-              <div className="menu-item">Plays</div>
-              <div className="menu-item">Sports</div>
-              <div className="menu-item">Activities</div>
-            </nav>
-          </Offcanvas.Body>
-        </Offcanvas>
+        <Offcanvas show={menuOpen} onHide={toggleMenu} placement="end" className="modern-offcanvas">
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title className="offcanvas-title">
+          Hey, {"Guest"} 👋
+        </Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+        <nav className="menu-nav">
+          <div className="menu-items">
+            <div className="menu-item" >
+              🎬 Movies
+            </div>
+            <div className="menu-item" >
+              📢 Events
+            </div>
+            <div className="menu-item" >
+              🎵 Plays
+            </div>
+            <div className="menu-item" >
+              🏀 Sports
+            </div>
+          </div>
+        </nav>
+      </Offcanvas.Body>
+    </Offcanvas>
       </header>
        </div>
        <div className="container">
