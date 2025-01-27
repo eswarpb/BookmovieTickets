@@ -4,7 +4,7 @@ import "./Seats.css";
 
 const Seats1 = () => {
   const location = useLocation();
-  const { movieName, theatreName, date, showtime } = location.state || {};
+  const { movieName, theatreName, date, showtime,} = location.state || {};
   const navigate = useNavigate();
 
   const rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"];
@@ -45,6 +45,7 @@ const Seats1 = () => {
         theatreName,
         date,
         showtime,
+        
       },
     });
   };
@@ -56,6 +57,7 @@ const Seats1 = () => {
         <p className="theatre-info">
           {theatreName} | {date}, {showtime}
         </p>
+       
       </div>
       <div className="theatre">
         {/* Seat Map */}

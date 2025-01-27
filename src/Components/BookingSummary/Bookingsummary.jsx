@@ -14,7 +14,7 @@ const BookingSummary = () => {
     movieName,
     theatreName,
     date,
-    showtime,
+    showtime, // Ensure poster is part of the state
   } = location.state || {};
 
   const handlePayment = async () => {
@@ -44,6 +44,7 @@ const BookingSummary = () => {
             convenienceFee,
             gst,
             grandTotal,
+             // Pass the poster to TicketPage
           },
         });
       },
@@ -84,9 +85,11 @@ const BookingSummary = () => {
           <p>Unlock the tastiest binges! Prebook your snacks and enjoy more.</p>
         </div>
       </div>
-    <p>  <button className="proceed-button" onClick={handlePayment}>
-        Proceed ₹{grandTotal.toFixed(2)}
-      </button></p>
+      <p>
+        <button className="proceed-button" onClick={handlePayment}>
+          Proceed ₹{grandTotal.toFixed(2)}
+        </button>
+      </p>
       <button className="back-button" onClick={() => navigate(-1)}>
         Go Back
       </button>

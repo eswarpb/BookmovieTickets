@@ -19,11 +19,9 @@ const TicketPage = () => {
     convenienceFee,
     gst,
     grandTotal,
-    movie, // Add a movie image to your state when navigating
   } = location.state || {};
 
   if (!selectedSeats) {
-    // Redirect to home if no ticket data is available
     navigate("/");
     return null;
   }
@@ -49,7 +47,6 @@ const TicketPage = () => {
     doc.text(`Selected Seats: ${selectedSeats.join(", ")}`, 10, 70);
     doc.text(`Total Paid: ₹${grandTotal.toFixed(2)}`, 10, 80);
 
-    // Add QR Code to PDF using useRef
     const qrCanvas = qrRef.current?.querySelector("canvas");
     if (qrCanvas) {
       const qrDataUrl = qrCanvas.toDataURL("image/png");
@@ -61,34 +58,36 @@ const TicketPage = () => {
 
   return (
     <div className="ticket-page">
-      <h2>Your Ticket</h2>
+      <div className="ticket-container">
+        <h2 className="ticket-header">🎫 Your Movie Ticket</h2>
 
-      {/* Movie Poster */}
-      {movie && <img src={movie.poster} alt={movieName} className="movie-posterr" />}
+        <div className="ticket-info">
+          <div className="movie-details">
+            <h3>{movieName}</h3>
+            <p><strong>Theatre:</strong> {theatreName}</p>
+            <p><strong>Date & Time:</strong> {date}, {showtime}</p>
+            <p><strong>Seats:</strong> {selectedSeats.join(", ")}</p>
+            <p><strong>Convenience Fee:</strong> ₹{convenienceFee.toFixed(2)}</p>
+            <p><strong>GST:</strong> ₹{gst.toFixed(2)}</p>
+            <p><strong>Total Paid:</strong> ₹{grandTotal.toFixed(2)}</p>
+          </div>
 
-      <div className="ticket-details">
-        <p><strong>Movie:</strong> {movieName}</p>
-        <p><strong>Theatre:</strong> {theatreName}</p>
-        <p><strong>Date & Time:</strong> {date}, {showtime}</p>
-        <p><strong>Selected Seats:</strong> {selectedSeats.join(", ")}</p>
-        <p><strong>Convenience Fee:</strong> ₹{convenienceFee.toFixed(2)}</p>
-        <p><strong>GST:</strong> ₹{gst.toFixed(2)}</p>
-        <p><strong>Total Paid:</strong> ₹{grandTotal.toFixed(2)}</p>
-      </div>
+          <div className="qr-section">
+            <h4>Scan this QR Code at the Theatre</h4>
+            <div ref={qrRef}>
+              <QRCode value={qrData} size={120} />
+            </div>
+          </div>
+        </div>
 
-      {/* QR Code */}
-      <div className="qr-code-container" ref={qrRef}>
-        <h3>Scan this QR Code at the Theatre</h3>
-        <QRCode value={qrData} size={200} />
-      </div>
-
-      <div className="action-buttons">
-        <button className="download-button" onClick={handleDownload}>
-          Download Ticket
-        </button>
-        <button className="home-button" onClick={() => navigate("/")}>
-          Back to Home
-        </button>
+        <div className="action-buttons">
+          <button className="download-button" onClick={handleDownload}>
+            Download Ticket
+          </button>
+          <button className="home-button" onClick={() => navigate("/")}>
+            Back to Home
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ function MovieDetailsPage() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const handleBookTickets = () => {
-    navigate("/theatre-details", { state: { movieName: movie.title } });
+    navigate("/theatre-details", { state: { movieName: movie.title ,poster: movie.poster} });
   };
 
   return (

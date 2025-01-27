@@ -6,7 +6,7 @@ import datab from "../TheatresData/Theatresfirebase"; // Firebase config
 import { collection, getDocs } from "firebase/firestore";
 import "./TheatersDetails.css";
 
-const MovieShowtimes = () => {
+const MovieShowtimes = (movie) => {
   const [theatresData, setTheatresData] = useState([]); // Theater data state
   const [loading, setLoading] = useState(true); // Loading state
   const [selectedLanguage, setSelectedLanguage] = useState("Telugu"); // Language filter state
@@ -74,6 +74,7 @@ const MovieShowtimes = () => {
       theatreName,
       showtime,
       date: date.toDateString(),
+      poster: movie.poster,
     };
 
     if (classType === "available") {
