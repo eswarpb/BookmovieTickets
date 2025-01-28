@@ -39,23 +39,29 @@ const TicketPage = () => {
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.text("Your Movie Ticket", 10, 20);
-
+  
+    // Movie Details Section
     doc.setFontSize(12);
     doc.text(`Movie: ${movieName}`, 10, 40);
     doc.text(`Theatre: ${theatreName}`, 10, 50);
     doc.text(`Date & Time: ${date}, ${showtime}`, 10, 60);
     doc.text(`Selected Seats: ${selectedSeats.join(", ")}`, 10, 70);
-    doc.text(`Total Paid: ₹${grandTotal.toFixed(2)}`, 10, 80);
-
+    doc.text(`Convenience Fee: ₹${convenienceFee.toFixed(2)}`, 10, 80);
+    doc.text(`GST: ₹${gst.toFixed(2)}`, 10, 90);
+    doc.text(`Total Paid: ₹${grandTotal.toFixed(2)}`, 10, 100);
+  
+    // Add QR Code Image
     const qrCanvas = qrRef.current?.querySelector("canvas");
     if (qrCanvas) {
       const qrDataUrl = qrCanvas.toDataURL("image/png");
-      doc.addImage(qrDataUrl, "PNG", 150, 20, 40, 40);
+      // Positioning QR code
+      doc.addImage(qrDataUrl, "PNG", 150, 40, 40, 40);
     }
-
+  
+    // Saving the PDF
     doc.save("Movie_Ticket.pdf");
   };
-
+  
   return (
     <div className="ticket-page">
       <div className="ticket-container">
