@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Modal from "react-modal";
 import "./BookingSummary.css";
 
 const BookingSummary = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [paymentId, setPaymentId] = useState(null); // State to store payment ID
+  const [paymentId, setPaymentId] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -24,7 +26,7 @@ const BookingSummary = () => {
     const razorpayKey = process.env.REACT_APP_RAZORPAY_KEY_ID;
 
     if (!razorpayKey) {
-      alert("Razorpay key not found in environment variables");
+      toast.error("Razorpay key not found in environment variables");
       return;
     }
 
@@ -35,9 +37,9 @@ const BookingSummary = () => {
       name: "Movie Booking",
       description: "Enjoy your show!",
       handler: function (response) {
-        // Store payment ID and show modal
         setPaymentId(response.razorpay_payment_id);
         setIsModalOpen(true);
+        toast.success("Payment successful!");
       },
       prefill: {
         name: "Your Name",
@@ -53,7 +55,7 @@ const BookingSummary = () => {
     rzp.open();
 
     rzp.on("payment.failed", function (response) {
-      alert(`Payment Failed: ${response.error.description}`);
+      toast.error(`Payment Failed: ${response.error.description}`);
     });
   };
 
@@ -70,13 +72,14 @@ const BookingSummary = () => {
         convenienceFee,
         gst,
         grandTotal,
-        paymentId, // Pass the payment ID to the ticket page
+        paymentId,
       },
     });
   };
 
   return (
     <div className="booking-summary">
+      <ToastContainer />
       <h2 className="h2">Booking Summary</h2>
       <div className="summary-container">
         <div className="details-section">
@@ -107,7 +110,6 @@ const BookingSummary = () => {
         Go Back
       </button>
 
-      {/* Modal for payment success */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={handleModalClose}
@@ -117,7 +119,7 @@ const BookingSummary = () => {
       >
         <h2>Payment Successful!</h2>
         <p>Your payment was successful.</p>
-        <p>Payment ID: {paymentId}</p> {/* Display the payment ID */}
+        <p>Payment ID: {paymentId}</p>
         <p>You can now view your ticket.</p>
         <div className="modal-buttons">
           <button className="modal-button" onClick={handleModalClose}>
