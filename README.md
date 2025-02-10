@@ -121,3 +121,8 @@ To start the development server and view the application, run the following comm
 
 npm start
 This will start the application on your computer's local development server, accessible at http://localhost:3000
+
+
+preview of project working:
+
+![alt text](ezgif-7e1d4da8595097.gif)
